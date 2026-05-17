@@ -1,0 +1,165 @@
+:root {
+  --bg: #0d1117;
+  --panel: #161b22;
+  --line: #21262d;
+  --text: #c9d1d9;
+  --muted: #768390;
+  --accent: #2f81f7;
+  --accent-2: #3fb950;
+  --pin: #1c2430;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+  margin: 0;
+}
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font: 13px/1.4 ui-monospace, "SF Mono", Menlo, monospace;
+}
+
+.app {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.topbar {
+  padding: 16px 20px 12px;
+  border-bottom: 1px solid var(--line);
+  background: var(--panel);
+}
+
+.topbar h1 {
+  margin: 0;
+  font-size: 18px;
+  letter-spacing: 0.5px;
+}
+.topbar h1::before {
+  content: "▦ ";
+  color: var(--accent);
+}
+
+.stats {
+  display: flex;
+  gap: 22px;
+  margin-top: 10px;
+  flex-wrap: wrap;
+}
+
+.stat {
+  display: flex;
+  flex-direction: column;
+}
+.stat-value {
+  font-size: 18px;
+  font-weight: 600;
+}
+.stat-label {
+  font-size: 11px;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+.stat.hl .stat-value {
+  color: var(--accent-2);
+}
+
+.hint {
+  margin: 10px 0 0;
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.grid-frame {
+  position: relative;
+  flex: 1;
+  min-height: 0;
+}
+
+.header-row {
+  position: absolute;
+  inset: 0 0 auto 0;
+  background: var(--panel);
+  border-bottom: 1px solid var(--line);
+  overflow: hidden;
+  z-index: 5;
+}
+
+.header-track {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  will-change: transform;
+}
+
+.scroll {
+  position: absolute;
+  inset: 0;
+  overflow: auto;
+  contain: strict;
+}
+
+.content {
+  position: relative;
+}
+
+.row {
+  position: absolute;
+  left: 0;
+  display: flex;
+  align-items: stretch;
+}
+
+.spacer {
+  flex: none;
+}
+
+.cell {
+  padding: 8px 12px;
+  border-right: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+  white-space: normal;
+  overflow: hidden;
+  background: var(--bg);
+}
+
+.cell.pinned {
+  position: sticky;
+}
+
+.cell.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 100%;
+  font-weight: 600;
+  color: var(--text);
+  cursor: grab;
+  user-select: none;
+  background: var(--panel);
+}
+.cell.header:active {
+  cursor: grabbing;
+}
+.cell.header .grip {
+  color: var(--muted);
+  font-size: 11px;
+}
+
+.cell.pinned {
+  background: var(--pin);
+  border-right: 1px solid var(--accent);
+}
+.cell.header.pinned {
+  position: absolute;
+  z-index: 6;
+}
